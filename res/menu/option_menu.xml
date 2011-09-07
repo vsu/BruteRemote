@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (c) 2011 Victor Su
+     This program is open source. For license terms, see the LICENSE file.
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/preferences"
+          android:icon="@drawable/ic_menu_preferences"
+          android:title="@string/menu_item_preferences"
+    />
+</menu>

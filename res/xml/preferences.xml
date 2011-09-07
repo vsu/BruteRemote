@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (c) 2011 Victor Su
+     This program is open source. For license terms, see the LICENSE file.
+-->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/category_server">
+		<EditTextPreference
+			android:key="ip_address"
+			android:title="@string/pref_header_ip_address"
+			android:dialogTitle="@string/pref_header_ip_address" />
+		<EditTextPreference
+			android:key="port"
+			android:title="@string/pref_header_port"
+			android:dialogTitle="@string/pref_header_port"
+			android:numeric="integer"
+			android:maxLength="5" />
+	</PreferenceCategory>
+</PreferenceScreen>

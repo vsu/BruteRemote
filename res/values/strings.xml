@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (c) 2011 Victor Su
+     This program is open source. For license terms, see the LICENSE file.
+-->
+<resources>
+    <string name="app_name">BruteRemote</string>
+    <string name="button_browse">...</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_close">Close</string>
+    <string name="button_decrement">-</string>
+    <string name="button_delete">X</string>
+    <string name="button_increment">+</string>
+    <string name="button_ok">OK</string>
+    <string name="button_reset">Reset</string>
+    <string name="button_view">-/+</string>
+    <string name="category_server">Server</string>
+    <string name="label_filename">Filename:</string>
+    <string name="label_level">Level:</string>
+    <string name="label_level_nc">Level</string>
+    <string name="menu_item_preferences">Preferences</string>
+    <string name="message_delete_file">Clear filename?</string>
+    <string name="message_invalid_file">The selected file is not a valid impulse response file and could not be opened.</string>
+    <string name="message_no_server">No server has been specified.  Please set connection information in preferences.</string>
+    <string name="message_open_connection_error">Could not open connection to server.</string>
+    <string name="message_open_file">Open file</string>
+    <string name="message_send_data_error">Could not send data to server.</string>
+    <string name="pref_header_ip_address">IP Address</string>
+    <string name="pref_header_port">Port</string>
+    <string name="tab_equalizer">Equalizer</string>
+    <string name="tab_file1">File 1</string>
+    <string name="tab_file2">File 2</string>
+    <string name="tab_file3">File 3</string>
+    <string name="title_no_server">Server</string>
+    <string name="title_file_browser">Open File</string>
+    <string name="title_file_confirm">Confirm</string>
+    <string name="title_invalid_file">Invalid File</string>
+    <string name="title_preferences">Preferences</string>
+</resources>
