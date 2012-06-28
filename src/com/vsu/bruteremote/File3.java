@@ -12,21 +12,19 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-public class File3 extends Fragment {
+public class File3 extends Activity {
     // Debugging
     private static final String TAG = "File3";
     private static final boolean D = false;
@@ -53,8 +51,8 @@ public class File3 extends Fragment {
     private SharedPreferences mPreferences;
 
     /**
-     * Called when the fragment is first created.
-     * @param savedInstanceState  If the fragment is being re-created from a previous
+     * Called when the activity is created.
+     * @param savedInstanceState  If the activity is being re-created from a previous
      *                            saved state, this is the state.
      */
     @Override
@@ -62,27 +60,10 @@ public class File3 extends Fragment {
         if (D) Log.e(TAG, "+ ON CREATE +");
 
         super.onCreate(savedInstanceState);
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-    }
+        setContentView(R.layout.file3);
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-    /**
-     * Called when the fragment is requested to draw its user interface.
-     * @param inflater   The LayoutInflater object that can be used to inflate
-     *                   any views in the fragment.
-     * @param container  If non-null, this is the parent view that the fragment's UI
-     *                   should be attached to. The fragment should not add the view
-     *                   itself, but this can be used to generate the LayoutParams of
-     *                   the view.
-     * @param savedInstanceState  If non-null, this fragment is being re-constructed
-     *                            from a previous saved state as given here.
-     */
-    @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        if (D) Log.e(TAG, "+ ON CREATE VIEW +");
-        View v = inflater.inflate(R.layout.file3, container, false);
-
-        mButtonEnable = (ToggleButton)v.findViewById(R.id.toggleButtonEnableFile3);
+        mButtonEnable = (ToggleButton)findViewById(R.id.toggleButtonEnableFile3);
         mButtonEnable.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 if (BruteRemote.mIO.checkConnection()) {
@@ -91,8 +72,8 @@ public class File3 extends Fragment {
             }
         });
 
-        final TextView textViewLevel = (TextView)v.findViewById(R.id.textViewLevelFile3);
-        mSeekBarLevel = (SeekBar)v.findViewById(R.id.seekBarLevelFile3);
+        final TextView textViewLevel = (TextView)findViewById(R.id.textViewLevelFile3);
+        mSeekBarLevel = (SeekBar)findViewById(R.id.seekBarLevelFile3);
 
         mSeekBarLevel.setMax(LEVEL_SEEKBAR_RANGE);
 
@@ -115,26 +96,26 @@ public class File3 extends Fragment {
             }
         });
 
-        final Button buttonBrowse = (Button)v.findViewById(R.id.buttonBrowseFile3);
+        final Button buttonBrowse = (Button)findViewById(R.id.buttonBrowseFile3);
         buttonBrowse.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 String directory = mPreferences.getString(KEY_PREF_DIRECTORY, "");
 
-                Intent intent = new Intent(getActivity(), FileBrowser.class);
+                Intent intent = new Intent(v.getContext(), FileBrowser.class);
                 intent.putExtra(FileBrowser.EXTRA_STARTPATH, directory);
 
                 startActivityForResult(intent, FileBrowser.REQUEST_SELECT_FILE);
             }
         });
 
-        final Button buttonDelete = (Button)v.findViewById(R.id.buttonDeleteFile3);
+        final Button buttonDelete = (Button)findViewById(R.id.buttonDeleteFile3);
         buttonDelete.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 TextView textViewFilename =
-                        (TextView)getActivity().findViewById(R.id.textViewFilenameFile3);
+                        (TextView)findViewById(R.id.textViewFilenameFile3);
 
                 if (!textViewFilename.getText().equals("")) {
-                    new AlertDialog.Builder(getActivity())
+                    new AlertDialog.Builder(v.getContext())
                     .setIcon(android.R.drawable.ic_dialog_info)
                     .setTitle(R.string.title_file_confirm)
                     .setMessage(R.string.message_delete_file)
@@ -158,12 +139,10 @@ public class File3 extends Fragment {
                 }
             }
         });
-
-        return v;
     }
 
     /**
-     * Called when the fragment is resumed.
+     * Called when the activity is resumed.
      */
     @Override
     public synchronized void onResume() {
@@ -191,7 +170,7 @@ public class File3 extends Fragment {
                     String message =
                         getResources().getString(R.string.message_open_file) + " " + filename +	"?";
 
-                    new AlertDialog.Builder(getActivity())
+                    new AlertDialog.Builder(this)
                         .setIcon(android.R.drawable.ic_dialog_info)
                         .setTitle(R.string.title_file_confirm)
                         .setMessage(message)
@@ -205,10 +184,21 @@ public class File3 extends Fragment {
 
                                     // Set filename and refresh page
                                     if (BruteRemote.mIO.checkConnection()) {
-                                        BruteRemote.mIO.setFilename(IO.CMD_FILE3_FILENAME, fullPath);
-                                    refreshData();
+                                        if (BruteRemote.mIO.setFilename(IO.CMD_FILE3_FILENAME, fullPath)) {
+                                        	refreshData();
+                                        }
+                                        else {
+                                            Resources res = getResources();
+
+                                            new AlertDialog.Builder(File3.this)
+	                                    		.setIcon(android.R.drawable.ic_dialog_alert)
+	                            	    		.setTitle(res.getString(R.string.title_invalid_file))
+	                            	    		.setMessage(res.getString(R.string.message_invalid_file))
+	                            	    		.setNegativeButton(res.getString(R.string.button_close), null)
+	                            	    		.show();
+                                        }
+                                    }
                                 }
-                            }
                             }
                         )
                         .setNegativeButton(R.string.button_cancel,
@@ -257,10 +247,10 @@ public class File3 extends Fragment {
             mButtonEnable.setChecked(BruteRemote.mIO.getEnable(IO.CMD_FILE3_ENABLE));
             mSeekBarLevel.setProgress(toProgress(BruteRemote.mIO.getLevel(IO.CMD_FILE3_LEVEL)));
 
-            TextView textViewFilename = (TextView)getActivity().findViewById(R.id.textViewFilenameFile3);
+            TextView textViewFilename = (TextView)findViewById(R.id.textViewFilenameFile3);
             textViewFilename.setText(BruteRemote.mIO.getMetadata(IO.CMD_FILE3_FILENAME));
 
-            TextView textViewMetadata = (TextView)getActivity().findViewById(R.id.textViewMetadataFile3);
+            TextView textViewMetadata = (TextView)findViewById(R.id.textViewMetadataFile3);
             textViewMetadata.setText(BruteRemote.mIO.getMetadata(IO.CMD_FILE3_METADATA));
         }
     }

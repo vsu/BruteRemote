@@ -5,7 +5,7 @@
 -->
 <resources>
     <string name="app_name">BruteRemote</string>
-    <string name="button_browse">...</string>
+    <string name="button_browse">&#8230;</string>
     <string name="button_cancel">Cancel</string>
     <string name="button_close">Close</string>
     <string name="button_decrement">-</string>

@@ -10,20 +10,18 @@ package com.vsu.bruteremote;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
-public class Equalizer extends Fragment {
+public class Equalizer extends Activity {
     // Debugging
     private static final String TAG = "Equalizer";
     private static final boolean D = false;
@@ -90,15 +88,17 @@ public class Equalizer extends Fragment {
     private Map<Object, Object> mSeekBar2MagIndex = new HashMap<Object, Object>();
 
     /**
-     * Called when the fragment is first created.
-     * @param savedInstanceState  If the fragment is being re-created from a previous
+     * Called when the activity is created.
+     * @param savedInstanceState  If the activity is being re-created from a previous
      *                            saved state, this is the state.
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (D) Log.e(TAG, "+ ON CREATE +");
-        super.onCreate(savedInstanceState);
 
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.equalizer);
+        
         // Populate seekbar to textview label map
         mSeekBar2TextView.put(R.id.seekBarLevelEq, R.id.textViewLevelEq);
         mSeekBar2TextView.put(R.id.seekBarMag1, R.id.textViewMag1);
@@ -233,123 +233,105 @@ public class Equalizer extends Fragment {
         mSeekBar2MagIndex.put(R.id.seekBarMag29, "28");
         mSeekBar2MagIndex.put(R.id.seekBarMag30, "29");
         mSeekBar2MagIndex.put(R.id.seekBarMag31, "30");
-    }
 
-    /**
-     * Called when the fragment is requested to draw its user interface.
-     * @param inflater   The LayoutInflater object that can be used to inflate
-     *                   any views in the fragment.
-     * @param container  If non-null, this is the parent view that the fragment's UI
-     *                   should be attached to. The fragment should not add the view
-     *                   itself, but this can be used to generate the LayoutParams of
-     *                   the view.
-     * @param savedInstanceState  If non-null, this fragment is being re-constructed
-     *                            from a previous saved state as given here.
-     */
-    @Override
-    public View onCreateView (LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        if (D) Log.e(TAG, "+ ON CREATE VIEW +");
-        View v = inflater.inflate(R.layout.equalizer, container, false);
+        mSeekBarLevel = (SeekBar)findViewById(R.id.seekBarLevelEq);
+        mSeekBarMag1 = (SeekBar)findViewById(R.id.seekBarMag1);
+        mSeekBarMag2 = (SeekBar)findViewById(R.id.seekBarMag2);
+        mSeekBarMag3 = (SeekBar)findViewById(R.id.seekBarMag3);
+        mSeekBarMag4 = (SeekBar)findViewById(R.id.seekBarMag4);
+        mSeekBarMag5 = (SeekBar)findViewById(R.id.seekBarMag5);
+        mSeekBarMag6 = (SeekBar)findViewById(R.id.seekBarMag6);
+        mSeekBarMag7 = (SeekBar)findViewById(R.id.seekBarMag7);
+        mSeekBarMag8 = (SeekBar)findViewById(R.id.seekBarMag8);
+        mSeekBarMag9 = (SeekBar)findViewById(R.id.seekBarMag9);
+        mSeekBarMag10 = (SeekBar)findViewById(R.id.seekBarMag10);
+        mSeekBarMag11 = (SeekBar)findViewById(R.id.seekBarMag11);
+        mSeekBarMag12 = (SeekBar)findViewById(R.id.seekBarMag12);
+        mSeekBarMag13 = (SeekBar)findViewById(R.id.seekBarMag13);
+        mSeekBarMag14 = (SeekBar)findViewById(R.id.seekBarMag14);
+        mSeekBarMag15 = (SeekBar)findViewById(R.id.seekBarMag15);
+        mSeekBarMag16 = (SeekBar)findViewById(R.id.seekBarMag16);
+        mSeekBarMag17 = (SeekBar)findViewById(R.id.seekBarMag17);
+        mSeekBarMag18 = (SeekBar)findViewById(R.id.seekBarMag18);
+        mSeekBarMag19 = (SeekBar)findViewById(R.id.seekBarMag19);
+        mSeekBarMag20 = (SeekBar)findViewById(R.id.seekBarMag20);
+        mSeekBarMag21 = (SeekBar)findViewById(R.id.seekBarMag21);
+        mSeekBarMag22 = (SeekBar)findViewById(R.id.seekBarMag22);
+        mSeekBarMag23 = (SeekBar)findViewById(R.id.seekBarMag23);
+        mSeekBarMag24 = (SeekBar)findViewById(R.id.seekBarMag24);
+        mSeekBarMag25 = (SeekBar)findViewById(R.id.seekBarMag25);
+        mSeekBarMag26 = (SeekBar)findViewById(R.id.seekBarMag26);
+        mSeekBarMag27 = (SeekBar)findViewById(R.id.seekBarMag27);
+        mSeekBarMag28 = (SeekBar)findViewById(R.id.seekBarMag28);
+        mSeekBarMag29 = (SeekBar)findViewById(R.id.seekBarMag29);
+        mSeekBarMag30 = (SeekBar)findViewById(R.id.seekBarMag30);
+        mSeekBarMag31 = (SeekBar)findViewById(R.id.seekBarMag31);
 
-        mSeekBarLevel = (SeekBar)v.findViewById(R.id.seekBarLevelEq);
-        mSeekBarMag1 = (SeekBar)v.findViewById(R.id.seekBarMag1);
-        mSeekBarMag2 = (SeekBar)v.findViewById(R.id.seekBarMag2);
-        mSeekBarMag3 = (SeekBar)v.findViewById(R.id.seekBarMag3);
-        mSeekBarMag4 = (SeekBar)v.findViewById(R.id.seekBarMag4);
-        mSeekBarMag5 = (SeekBar)v.findViewById(R.id.seekBarMag5);
-        mSeekBarMag6 = (SeekBar)v.findViewById(R.id.seekBarMag6);
-        mSeekBarMag7 = (SeekBar)v.findViewById(R.id.seekBarMag7);
-        mSeekBarMag8 = (SeekBar)v.findViewById(R.id.seekBarMag8);
-        mSeekBarMag9 = (SeekBar)v.findViewById(R.id.seekBarMag9);
-        mSeekBarMag10 = (SeekBar)v.findViewById(R.id.seekBarMag10);
-        mSeekBarMag11 = (SeekBar)v.findViewById(R.id.seekBarMag11);
-        mSeekBarMag12 = (SeekBar)v.findViewById(R.id.seekBarMag12);
-        mSeekBarMag13 = (SeekBar)v.findViewById(R.id.seekBarMag13);
-        mSeekBarMag14 = (SeekBar)v.findViewById(R.id.seekBarMag14);
-        mSeekBarMag15 = (SeekBar)v.findViewById(R.id.seekBarMag15);
-        mSeekBarMag16 = (SeekBar)v.findViewById(R.id.seekBarMag16);
-        mSeekBarMag17 = (SeekBar)v.findViewById(R.id.seekBarMag17);
-        mSeekBarMag18 = (SeekBar)v.findViewById(R.id.seekBarMag18);
-        mSeekBarMag19 = (SeekBar)v.findViewById(R.id.seekBarMag19);
-        mSeekBarMag20 = (SeekBar)v.findViewById(R.id.seekBarMag20);
-        mSeekBarMag21 = (SeekBar)v.findViewById(R.id.seekBarMag21);
-        mSeekBarMag22 = (SeekBar)v.findViewById(R.id.seekBarMag22);
-        mSeekBarMag23 = (SeekBar)v.findViewById(R.id.seekBarMag23);
-        mSeekBarMag24 = (SeekBar)v.findViewById(R.id.seekBarMag24);
-        mSeekBarMag25 = (SeekBar)v.findViewById(R.id.seekBarMag25);
-        mSeekBarMag26 = (SeekBar)v.findViewById(R.id.seekBarMag26);
-        mSeekBarMag27 = (SeekBar)v.findViewById(R.id.seekBarMag27);
-        mSeekBarMag28 = (SeekBar)v.findViewById(R.id.seekBarMag28);
-        mSeekBarMag29 = (SeekBar)v.findViewById(R.id.seekBarMag29);
-        mSeekBarMag30 = (SeekBar)v.findViewById(R.id.seekBarMag30);
-        mSeekBarMag31 = (SeekBar)v.findViewById(R.id.seekBarMag31);
+        final Button buttonIncrementLevel = (Button)findViewById(R.id.buttonIncrementLevelEq);
+        final Button buttonIncrementMag1 = (Button)findViewById(R.id.buttonIncrementMag1);
+        final Button buttonIncrementMag2 = (Button)findViewById(R.id.buttonIncrementMag2);
+        final Button buttonIncrementMag3 = (Button)findViewById(R.id.buttonIncrementMag3);
+        final Button buttonIncrementMag4 = (Button)findViewById(R.id.buttonIncrementMag4);
+        final Button buttonIncrementMag5 = (Button)findViewById(R.id.buttonIncrementMag5);
+        final Button buttonIncrementMag6 = (Button)findViewById(R.id.buttonIncrementMag6);
+        final Button buttonIncrementMag7 = (Button)findViewById(R.id.buttonIncrementMag7);
+        final Button buttonIncrementMag8 = (Button)findViewById(R.id.buttonIncrementMag8);
+        final Button buttonIncrementMag9 = (Button)findViewById(R.id.buttonIncrementMag9);
+        final Button buttonIncrementMag10 = (Button)findViewById(R.id.buttonIncrementMag10);
+        final Button buttonIncrementMag11 = (Button)findViewById(R.id.buttonIncrementMag11);
+        final Button buttonIncrementMag12 = (Button)findViewById(R.id.buttonIncrementMag12);
+        final Button buttonIncrementMag13 = (Button)findViewById(R.id.buttonIncrementMag13);
+        final Button buttonIncrementMag14 = (Button)findViewById(R.id.buttonIncrementMag14);
+        final Button buttonIncrementMag15 = (Button)findViewById(R.id.buttonIncrementMag15);
+        final Button buttonIncrementMag16 = (Button)findViewById(R.id.buttonIncrementMag16);
+        final Button buttonIncrementMag17 = (Button)findViewById(R.id.buttonIncrementMag17);
+        final Button buttonIncrementMag18 = (Button)findViewById(R.id.buttonIncrementMag18);
+        final Button buttonIncrementMag19 = (Button)findViewById(R.id.buttonIncrementMag19);
+        final Button buttonIncrementMag20 = (Button)findViewById(R.id.buttonIncrementMag20);
+        final Button buttonIncrementMag21 = (Button)findViewById(R.id.buttonIncrementMag21);
+        final Button buttonIncrementMag22 = (Button)findViewById(R.id.buttonIncrementMag22);
+        final Button buttonIncrementMag23 = (Button)findViewById(R.id.buttonIncrementMag23);
+        final Button buttonIncrementMag24 = (Button)findViewById(R.id.buttonIncrementMag24);
+        final Button buttonIncrementMag25 = (Button)findViewById(R.id.buttonIncrementMag25);
+        final Button buttonIncrementMag26 = (Button)findViewById(R.id.buttonIncrementMag26);
+        final Button buttonIncrementMag27 = (Button)findViewById(R.id.buttonIncrementMag27);
+        final Button buttonIncrementMag28 = (Button)findViewById(R.id.buttonIncrementMag28);
+        final Button buttonIncrementMag29 = (Button)findViewById(R.id.buttonIncrementMag29);
+        final Button buttonIncrementMag30 = (Button)findViewById(R.id.buttonIncrementMag30);
+        final Button buttonIncrementMag31 = (Button)findViewById(R.id.buttonIncrementMag31);
 
-        final Button buttonIncrementLevel = (Button)v.findViewById(R.id.buttonIncrementLevelEq);
-        final Button buttonIncrementMag1 = (Button)v.findViewById(R.id.buttonIncrementMag1);
-        final Button buttonIncrementMag2 = (Button)v.findViewById(R.id.buttonIncrementMag2);
-        final Button buttonIncrementMag3 = (Button)v.findViewById(R.id.buttonIncrementMag3);
-        final Button buttonIncrementMag4 = (Button)v.findViewById(R.id.buttonIncrementMag4);
-        final Button buttonIncrementMag5 = (Button)v.findViewById(R.id.buttonIncrementMag5);
-        final Button buttonIncrementMag6 = (Button)v.findViewById(R.id.buttonIncrementMag6);
-        final Button buttonIncrementMag7 = (Button)v.findViewById(R.id.buttonIncrementMag7);
-        final Button buttonIncrementMag8 = (Button)v.findViewById(R.id.buttonIncrementMag8);
-        final Button buttonIncrementMag9 = (Button)v.findViewById(R.id.buttonIncrementMag9);
-        final Button buttonIncrementMag10 = (Button)v.findViewById(R.id.buttonIncrementMag10);
-        final Button buttonIncrementMag11 = (Button)v.findViewById(R.id.buttonIncrementMag11);
-        final Button buttonIncrementMag12 = (Button)v.findViewById(R.id.buttonIncrementMag12);
-        final Button buttonIncrementMag13 = (Button)v.findViewById(R.id.buttonIncrementMag13);
-        final Button buttonIncrementMag14 = (Button)v.findViewById(R.id.buttonIncrementMag14);
-        final Button buttonIncrementMag15 = (Button)v.findViewById(R.id.buttonIncrementMag15);
-        final Button buttonIncrementMag16 = (Button)v.findViewById(R.id.buttonIncrementMag16);
-        final Button buttonIncrementMag17 = (Button)v.findViewById(R.id.buttonIncrementMag17);
-        final Button buttonIncrementMag18 = (Button)v.findViewById(R.id.buttonIncrementMag18);
-        final Button buttonIncrementMag19 = (Button)v.findViewById(R.id.buttonIncrementMag19);
-        final Button buttonIncrementMag20 = (Button)v.findViewById(R.id.buttonIncrementMag20);
-        final Button buttonIncrementMag21 = (Button)v.findViewById(R.id.buttonIncrementMag21);
-        final Button buttonIncrementMag22 = (Button)v.findViewById(R.id.buttonIncrementMag22);
-        final Button buttonIncrementMag23 = (Button)v.findViewById(R.id.buttonIncrementMag23);
-        final Button buttonIncrementMag24 = (Button)v.findViewById(R.id.buttonIncrementMag24);
-        final Button buttonIncrementMag25 = (Button)v.findViewById(R.id.buttonIncrementMag25);
-        final Button buttonIncrementMag26 = (Button)v.findViewById(R.id.buttonIncrementMag26);
-        final Button buttonIncrementMag27 = (Button)v.findViewById(R.id.buttonIncrementMag27);
-        final Button buttonIncrementMag28 = (Button)v.findViewById(R.id.buttonIncrementMag28);
-        final Button buttonIncrementMag29 = (Button)v.findViewById(R.id.buttonIncrementMag29);
-        final Button buttonIncrementMag30 = (Button)v.findViewById(R.id.buttonIncrementMag30);
-        final Button buttonIncrementMag31 = (Button)v.findViewById(R.id.buttonIncrementMag31);
-
-        final Button buttonDecrementLevel = (Button)v.findViewById(R.id.buttonDecrementLevelEq);
-        final Button buttonDecrementMag1 = (Button)v.findViewById(R.id.buttonDecrementMag1);
-        final Button buttonDecrementMag2 = (Button)v.findViewById(R.id.buttonDecrementMag2);
-        final Button buttonDecrementMag3 = (Button)v.findViewById(R.id.buttonDecrementMag3);
-        final Button buttonDecrementMag4 = (Button)v.findViewById(R.id.buttonDecrementMag4);
-        final Button buttonDecrementMag5 = (Button)v.findViewById(R.id.buttonDecrementMag5);
-        final Button buttonDecrementMag6 = (Button)v.findViewById(R.id.buttonDecrementMag6);
-        final Button buttonDecrementMag7 = (Button)v.findViewById(R.id.buttonDecrementMag7);
-        final Button buttonDecrementMag8 = (Button)v.findViewById(R.id.buttonDecrementMag8);
-        final Button buttonDecrementMag9 = (Button)v.findViewById(R.id.buttonDecrementMag9);
-        final Button buttonDecrementMag10 = (Button)v.findViewById(R.id.buttonDecrementMag10);
-        final Button buttonDecrementMag11 = (Button)v.findViewById(R.id.buttonDecrementMag11);
-        final Button buttonDecrementMag12 = (Button)v.findViewById(R.id.buttonDecrementMag12);
-        final Button buttonDecrementMag13 = (Button)v.findViewById(R.id.buttonDecrementMag13);
-        final Button buttonDecrementMag14 = (Button)v.findViewById(R.id.buttonDecrementMag14);
-        final Button buttonDecrementMag15 = (Button)v.findViewById(R.id.buttonDecrementMag15);
-        final Button buttonDecrementMag16 = (Button)v.findViewById(R.id.buttonDecrementMag16);
-        final Button buttonDecrementMag17 = (Button)v.findViewById(R.id.buttonDecrementMag17);
-        final Button buttonDecrementMag18 = (Button)v.findViewById(R.id.buttonDecrementMag18);
-        final Button buttonDecrementMag19 = (Button)v.findViewById(R.id.buttonDecrementMag19);
-        final Button buttonDecrementMag20 = (Button)v.findViewById(R.id.buttonDecrementMag20);
-        final Button buttonDecrementMag21 = (Button)v.findViewById(R.id.buttonDecrementMag21);
-        final Button buttonDecrementMag22 = (Button)v.findViewById(R.id.buttonDecrementMag22);
-        final Button buttonDecrementMag23 = (Button)v.findViewById(R.id.buttonDecrementMag23);
-        final Button buttonDecrementMag24 = (Button)v.findViewById(R.id.buttonDecrementMag24);
-        final Button buttonDecrementMag25 = (Button)v.findViewById(R.id.buttonDecrementMag25);
-        final Button buttonDecrementMag26 = (Button)v.findViewById(R.id.buttonDecrementMag26);
-        final Button buttonDecrementMag27 = (Button)v.findViewById(R.id.buttonDecrementMag27);
-        final Button buttonDecrementMag28 = (Button)v.findViewById(R.id.buttonDecrementMag28);
-        final Button buttonDecrementMag29 = (Button)v.findViewById(R.id.buttonDecrementMag29);
-        final Button buttonDecrementMag30 = (Button)v.findViewById(R.id.buttonDecrementMag30);
-        final Button buttonDecrementMag31 = (Button)v.findViewById(R.id.buttonDecrementMag31);
+        final Button buttonDecrementLevel = (Button)findViewById(R.id.buttonDecrementLevelEq);
+        final Button buttonDecrementMag1 = (Button)findViewById(R.id.buttonDecrementMag1);
+        final Button buttonDecrementMag2 = (Button)findViewById(R.id.buttonDecrementMag2);
+        final Button buttonDecrementMag3 = (Button)findViewById(R.id.buttonDecrementMag3);
+        final Button buttonDecrementMag4 = (Button)findViewById(R.id.buttonDecrementMag4);
+        final Button buttonDecrementMag5 = (Button)findViewById(R.id.buttonDecrementMag5);
+        final Button buttonDecrementMag6 = (Button)findViewById(R.id.buttonDecrementMag6);
+        final Button buttonDecrementMag7 = (Button)findViewById(R.id.buttonDecrementMag7);
+        final Button buttonDecrementMag8 = (Button)findViewById(R.id.buttonDecrementMag8);
+        final Button buttonDecrementMag9 = (Button)findViewById(R.id.buttonDecrementMag9);
+        final Button buttonDecrementMag10 = (Button)findViewById(R.id.buttonDecrementMag10);
+        final Button buttonDecrementMag11 = (Button)findViewById(R.id.buttonDecrementMag11);
+        final Button buttonDecrementMag12 = (Button)findViewById(R.id.buttonDecrementMag12);
+        final Button buttonDecrementMag13 = (Button)findViewById(R.id.buttonDecrementMag13);
+        final Button buttonDecrementMag14 = (Button)findViewById(R.id.buttonDecrementMag14);
+        final Button buttonDecrementMag15 = (Button)findViewById(R.id.buttonDecrementMag15);
+        final Button buttonDecrementMag16 = (Button)findViewById(R.id.buttonDecrementMag16);
+        final Button buttonDecrementMag17 = (Button)findViewById(R.id.buttonDecrementMag17);
+        final Button buttonDecrementMag18 = (Button)findViewById(R.id.buttonDecrementMag18);
+        final Button buttonDecrementMag19 = (Button)findViewById(R.id.buttonDecrementMag19);
+        final Button buttonDecrementMag20 = (Button)findViewById(R.id.buttonDecrementMag20);
+        final Button buttonDecrementMag21 = (Button)findViewById(R.id.buttonDecrementMag21);
+        final Button buttonDecrementMag22 = (Button)findViewById(R.id.buttonDecrementMag22);
+        final Button buttonDecrementMag23 = (Button)findViewById(R.id.buttonDecrementMag23);
+        final Button buttonDecrementMag24 = (Button)findViewById(R.id.buttonDecrementMag24);
+        final Button buttonDecrementMag25 = (Button)findViewById(R.id.buttonDecrementMag25);
+        final Button buttonDecrementMag26 = (Button)findViewById(R.id.buttonDecrementMag26);
+        final Button buttonDecrementMag27 = (Button)findViewById(R.id.buttonDecrementMag27);
+        final Button buttonDecrementMag28 = (Button)findViewById(R.id.buttonDecrementMag28);
+        final Button buttonDecrementMag29 = (Button)findViewById(R.id.buttonDecrementMag29);
+        final Button buttonDecrementMag30 = (Button)findViewById(R.id.buttonDecrementMag30);
+        final Button buttonDecrementMag31 = (Button)findViewById(R.id.buttonDecrementMag31);
 
         mSeekBarLevel.setMax(LEVEL_SEEKBAR_RANGE);
         mSeekBarMag1.setMax(LEVEL_SEEKBAR_RANGE);
@@ -483,7 +465,7 @@ public class Equalizer extends Fragment {
         buttonDecrementMag30.setOnClickListener(buttonDecrementClickListener);
         buttonDecrementMag31.setOnClickListener(buttonDecrementClickListener);
 
-        mButtonEnable = (ToggleButton)v.findViewById(R.id.toggleButtonEnableEq);
+        mButtonEnable = (ToggleButton)findViewById(R.id.toggleButtonEnableEq);
         mButtonEnable.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 if (BruteRemote.mIO.checkConnection()) {
@@ -492,7 +474,7 @@ public class Equalizer extends Fragment {
             }
         });
 
-        final Button buttonReset = (Button)v.findViewById(R.id.buttonReset);
+        final Button buttonReset = (Button)findViewById(R.id.buttonReset);
         buttonReset.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 int zeroProgress = LEVEL_SEEKBAR_RANGE / 2;
@@ -567,7 +549,7 @@ public class Equalizer extends Fragment {
            }
         });
 
-        final Button buttonView = (Button)v.findViewById(R.id.buttonView);
+        final Button buttonView = (Button)findViewById(R.id.buttonView);
         buttonView.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 if (mButtonsVisible) {
@@ -774,12 +756,10 @@ public class Equalizer extends Fragment {
                 mButtonsVisible = !mButtonsVisible;
             }
         });
-
-        return v;
     }
 
     /**
-     * Called when the fragment is resumed.
+     * Called when the activity is resumed.
      */
     @Override
     public synchronized void onResume() {
@@ -796,7 +776,7 @@ public class Equalizer extends Fragment {
         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
             int textViewId = (Integer)mSeekBar2TextView.get(seekBar.getId());
 
-            TextView textView = (TextView)getActivity().findViewById(textViewId);
+            TextView textView = (TextView)findViewById(textViewId);
             updateDbLabel(textView, progress);
 
             if (fromUser) {
@@ -828,8 +808,8 @@ public class Equalizer extends Fragment {
             int seekBarId = (Integer)mIncrementButton2SeekBar.get(v.getId());
             int textViewId = (Integer)mSeekBar2TextView.get(seekBarId);
 
-            SeekBar seekBar = (SeekBar)getActivity().findViewById(seekBarId);
-            TextView textView = (TextView)getActivity().findViewById(textViewId);
+            SeekBar seekBar = (SeekBar)findViewById(seekBarId);
+            TextView textView = (TextView)findViewById(textViewId);
 
             incrementSeekBar(seekBar, textView);
         }
@@ -843,8 +823,8 @@ public class Equalizer extends Fragment {
             int seekBarId = (Integer)mDecrementButton2SeekBar.get(v.getId());
             int textViewId = (Integer)mSeekBar2TextView.get(seekBarId);
 
-            SeekBar seekBar = (SeekBar)getActivity().findViewById(seekBarId);
-            TextView textView = (TextView)getActivity().findViewById(textViewId);
+            SeekBar seekBar = (SeekBar)findViewById(seekBarId);
+            TextView textView = (TextView)findViewById(textViewId);
 
             decrementSeekBar(seekBar, textView);
         }
