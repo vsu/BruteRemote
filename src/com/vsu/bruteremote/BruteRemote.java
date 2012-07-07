@@ -7,7 +7,6 @@
 
 package com.vsu.bruteremote;
 
-import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,12 +19,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-import android.widget.Toast;
 
 public class BruteRemote extends TabActivity {
     // Debugging
     private static final String TAG = "BruteRemote";
-    private static final boolean D = false;
+    private static final boolean D = true;
 
     // Reference to the tab host.
     TabHost mTabHost;
@@ -84,7 +82,11 @@ public class BruteRemote extends TabActivity {
             mTabHost.setCurrentTabByTag(savedInstanceState.getString("tab"));
         }
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
         mIO = new IO();
+        mIO.setHostname(preferences.getString(Preferences.KEY_PREF_IP_ADDRESS, ""));
+        mIO.setPort(preferences.getString(Preferences.KEY_PREF_PORT, ""));
     }
 
     /**
@@ -95,51 +97,6 @@ public class BruteRemote extends TabActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("tab", mTabHost.getCurrentTabTag());
-    }
-
-    /**
-     * Called when the activity is resumed.
-     */
-    @Override
-    public synchronized void onResume() {
-        if (D) Log.e(TAG, "+ ON RESUME +");
-        super.onResume();
-
-        Resources res = getResources();
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        String hostname = preferences.getString(Preferences.KEY_PREF_IP_ADDRESS, "");
-
-        int port;
-        try {
-        	port = Integer.parseInt(preferences.getString(Preferences.KEY_PREF_PORT, ""));
-        }
-        catch (NumberFormatException e) {
-        	port = -1;
-        }
-
-        if (hostname.equals("") || port == -1) {
-        	new AlertDialog.Builder(this)
-        		.setIcon(android.R.drawable.ic_dialog_alert)
-	    		.setTitle(res.getString(R.string.title_no_server))
-	    		.setMessage(res.getString(R.string.message_no_server))
-	    		.setNegativeButton(res.getString(R.string.button_close), null)
-	    		.show();
-        }
-        else
-        {
-        	if (mIO.isConnected()) {
-        		mIO.close();
-        	}
-
-        	if (!mIO.connect(hostname, port)) {
-                Toast.makeText(
-                        this,
-                        res.getString(R.string.message_open_connection_error),
-                        Toast.LENGTH_LONG).show();
-	        }
-        }
     }
 
     /**

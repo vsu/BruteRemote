@@ -76,6 +76,7 @@ public class File1 extends Activity {
         mSeekBarLevel = (SeekBar)findViewById(R.id.seekBarLevelFile1);
 
         mSeekBarLevel.setMax(LEVEL_SEEKBAR_RANGE);
+        mSeekBarLevel.setProgress(toProgress(0));
 
         mSeekBarLevel.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -252,6 +253,15 @@ public class File1 extends Activity {
 
             TextView textViewMetadata = (TextView)findViewById(R.id.textViewMetadataFile1);
             textViewMetadata.setText(BruteRemote.mIO.getMetadata(IO.CMD_FILE1_METADATA));
-        }
+        } else {
+	    	Resources res = getResources();
+
+        	new AlertDialog.Builder(this)
+    		.setIcon(android.R.drawable.ic_dialog_alert)
+    		.setTitle(res.getString(R.string.title_connection_error))
+    		.setMessage(res.getString(R.string.message_connection_error))
+    		.setNegativeButton(res.getString(R.string.button_close), null)
+    		.show();		
+		}
     }
 }

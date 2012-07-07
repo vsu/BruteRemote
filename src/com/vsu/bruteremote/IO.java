@@ -77,20 +77,41 @@ public class IO {
 
     // The server port.
     private int mPort = -1;
-
+    
+    /**
+     * Sets the server hostname.
+     * @param hostname  The server hostname.
+     */
+    public void setHostname(String hostname)
+    {
+    	mHostname = hostname;
+    }
+    
+    /**
+     * Sets the server port.
+     * @param port  The server port.
+     */
+    public void setPort(String port)
+    {
+        int value;
+        try {
+        	value = Integer.parseInt(port);
+        }
+        catch (NumberFormatException e) {
+        	value = -1;
+        }
+        
+    	mPort = value;
+    }
+    
     /**
      * Opens a connection to the server.
-     * @param hostname  The server hostname.
-     * @param port      The server port.
-     * @returns         True if successful, false otherwise.
+     * @returns  True if successful, false otherwise.
      */
-    public boolean connect(String hostname, int port) {
-    	mHostname = hostname;
-    	mPort = port;
-
+    public boolean connect() {
         try	{
             mSocket = new Socket();
-            mSocket.connect(new InetSocketAddress(hostname, port), 1000);
+            mSocket.connect(new InetSocketAddress(mHostname, mPort), 1000);
         }
         catch (UnknownHostException e) {
             // Unknown host
@@ -143,7 +164,7 @@ public class IO {
 		}
 		else {
 			if (!mHostname.equals("") && (mPort != -1)) {
-				return connect(mHostname, mPort);
+				return connect();
 			}
 		}
 

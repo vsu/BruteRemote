@@ -76,11 +76,17 @@ public class Preferences extends PreferenceActivity implements OnSharedPreferenc
      * @param key                The preference key.
      */
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-        Preference pref = findPreference(key);
+    	Preference pref = findPreference(key);
 
         if (pref instanceof EditTextPreference) {
             EditTextPreference editTextPref = (EditTextPreference) pref;
             pref.setSummary(editTextPref.getText());
+
+    	    if (key.equals(KEY_PREF_IP_ADDRESS)) {
+    			BruteRemote.mIO.setHostname(editTextPref.getText());
+    	    } else if (key.equals(KEY_PREF_PORT)) {
+    	    	BruteRemote.mIO.setPort(editTextPref.getText());
+    	    }        
         }
     }
 }

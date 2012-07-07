@@ -21,8 +21,7 @@
     <string name="menu_item_preferences">Preferences</string>
     <string name="message_delete_file">Clear filename?</string>
     <string name="message_invalid_file">The selected file is not a valid impulse response file and could not be opened.</string>
-    <string name="message_no_server">No server has been specified.  Please set connection information in preferences.</string>
-    <string name="message_open_connection_error">Could not open connection to server.</string>
+    <string name="message_connection_error">Could not open a connection to the server.  Please check your server settings in preferences.</string>
     <string name="message_open_file">Open file</string>
     <string name="message_send_data_error">Could not send data to server.</string>
     <string name="pref_header_ip_address">IP Address</string>
@@ -31,7 +30,7 @@
     <string name="tab_file1">File 1</string>
     <string name="tab_file2">File 2</string>
     <string name="tab_file3">File 3</string>
-    <string name="title_no_server">Server</string>
+    <string name="title_connection_error">Server Connection Error</string>
     <string name="title_file_browser">Open File</string>
     <string name="title_file_confirm">Confirm</string>
     <string name="title_invalid_file">Invalid File</string>
