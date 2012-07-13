@@ -23,7 +23,7 @@ import android.widget.TabHost.TabSpec;
 public class BruteRemote extends TabActivity {
     // Debugging
     private static final String TAG = "BruteRemote";
-    private static final boolean D = true;
+    private static final boolean D = false;
 
     // Reference to the tab host.
     TabHost mTabHost;
