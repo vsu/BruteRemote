@@ -26,7 +26,7 @@ import android.widget.SeekBar.OnSeekBarChangeListener;
 public class Equalizer extends Activity {
 	// Debugging
 	private static final String TAG = "Equalizer";
-	private static final boolean D = true;
+	private static final boolean D = false;
 
 	// The maximum level in dB.
 	private static final int LEVEL_MAX_DB = 20;
